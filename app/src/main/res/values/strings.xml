@@ -3,4 +3,8 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_station">StationActivity</string>
+    <string name="station_name_text">Name</string>
+    <string name="station_address_text">Address</string>
+    <string name="station_photo_button">Take picture</string>
 </resources>
