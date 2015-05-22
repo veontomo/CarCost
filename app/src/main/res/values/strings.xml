@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">CarCost</string>
+
+    <string name="lay_refuels_statistics_add_data">Add data</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_add_refuel">AddRefuelActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="lay_add_refuel_photo_btn">Add photo</string>
+    <string name="lay_add_refuel_distance">Distance</string>
+</resources>
