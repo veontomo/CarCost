@@ -20,6 +20,10 @@
             android:name=".AddRefuelActivity"
             android:label="@string/title_activity_add_refuel" >
         </activity>
+        <activity
+            android:name=".AddStationActivity"
+            android:label="@string/title_activity_add_station" >
+        </activity>
     </application>
 
 </manifest>

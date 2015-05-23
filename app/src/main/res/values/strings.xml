@@ -12,4 +12,5 @@
     <string name="lay_add_refuel_paid">Paid</string>
     <string name="lay_add_refuel_quantity">Quantity</string>
     <string name="lay_add_refuel_add_station_btn">Add station</string>
+    <string name="title_activity_add_station">AddStationActivity</string>
 </resources>

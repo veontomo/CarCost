@@ -15,7 +15,8 @@ import android.widget.Toast;
 public class AddRefuelActivity extends Activity
 {
     private static final String TAG = "CarCost";
-    private static final int TAKE_PHOTO_REQUEST = 123;
+    private static final int TAKE_PHOTO_REQUEST = 1;
+    private static final int ADD_STATION_REQUEST = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,16 @@ public class AddRefuelActivity extends Activity
 
             }
         });
+
+        Button addStation = (Button) findViewById(R.id.lay_add_station);
+        addStation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), AddStationActivity.class);
+                startActivityForResult(intent, ADD_STATION_REQUEST);
+            }
+        });
+
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -47,6 +58,14 @@ public class AddRefuelActivity extends Activity
             } else {
                 Toast.makeText(getApplicationContext(), "photo is NOT recieved", Toast.LENGTH_LONG).show();
             }
+        }
+        if (requestCode == ADD_STATION_REQUEST){
+            if (resultCode == RESULT_OK) {
+                Toast.makeText(getApplicationContext(), "station is added", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "station is NOT recieved", Toast.LENGTH_LONG).show();
+            }
+
         }
     }
 

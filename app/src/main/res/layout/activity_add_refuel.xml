@@ -70,6 +70,7 @@
         android:layout_below="@id/lay_add_refuel_price_input"
         android:layout_alignLeft="@id/lay_add_refuel_price_input"
         android:layout_alignStart="@id/lay_add_refuel_price_input"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -87,11 +88,11 @@
         android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/lay_add_refuel_quantity_input"
+        android:layout_below="@id/lay_add_refuel_paid_input"
         android:layout_toRightOf="@id/lay_add_refuel_quantity"
         android:layout_toEndOf="@id/lay_add_refuel_quantity"
-        android:layout_below="@id/lay_add_refuel_paid_input"
         android:layout_alignLeft="@id/lay_add_refuel_paid_input"
-        android:layout_alignStart="@id/lay_add_refuel_paid_input"/>
+        android:layout_alignStart="@id/lay_add_refuel_paid_input" />
 
     <Button
         android:layout_width="wrap_content"
@@ -107,7 +108,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/lay_add_refuel_add_station_btn"
-        android:id="@+id/lay_add_station_photo"
+        android:id="@+id/lay_add_station"
         android:layout_toRightOf="@id/lay_add_reciept_photo"
         android:layout_toEndOf="@id/lay_add_reciept_photo"
         android:layout_alignParentLeft="true"
