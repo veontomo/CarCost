@@ -21,4 +21,7 @@
     <string name="lay_add_station_cancel_station">Cancel</string>
     <string name="lay_add_station_distributor_text">Distributor</string>
     <string name="lay_add_station_distributor_hint">Q8, Agip, Esso, Tamoil etc</string>
+    <string name="lay_add_station_location">Coordinates</string>
+    <string name="lay_add_station_lat">latitude</string>
+    <string name="lay_add_station_long">longitude</string>
 </resources>

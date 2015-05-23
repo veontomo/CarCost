@@ -1,37 +1,94 @@
 package com.veontomo.carcost;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
+import android.content.Context;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.IOException;
+import java.util.List;
 
 
-public class AddStationActivity extends Activity {
+public class AddStationActivity extends Activity implements LocationListener{
+
+    private static final String TAG = "CarCost";
+    protected Context context = this;
+    protected LocationListener locationListener;
+
+    private TextView latText;
+    private TextView longText;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_station);
 
+        latText = (TextView) findViewById(R.id.lay_add_station_alt);
+        longText = (TextView) findViewById(R.id.lay_add_station_long);
+
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+
         Button locationBtn = (Button) findViewById(R.id.lay_add_station_add_location_btn);
         locationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+
             }
         });
     }
 
-    protected synchronized void buildGoogleApiClient() {
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build();
+    @Override
+    public void onLocationChanged(Location location) {
+        latText.setText(String.valueOf(location.getLatitude()));
+        longText.setText(String.valueOf(location.getLongitude()));
+        Log.i(TAG, "lat: " + String.valueOf(location.getLatitude()) + ", long: " + String.valueOf(location.getLongitude()));
+        Geocoder geo = new Geocoder(getApplicationContext());
+        try {
+            List<Address> address = geo.getFromLocation(location.getLatitude(), location.getLongitude(), 4);
+            TextView addr = (TextView) findViewById(R.id.lay_add_station_alt);
+            Toast.makeText(getApplicationContext(), "address", Toast.LENGTH_LONG).show();
+            if (address.size() > 0){
+                addr.setText(address.get(0).toString());
+            } else {
+                Toast.makeText(getApplicationContext(), "no address", Toast.LENGTH_LONG).show();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "failed retrieving address", Toast.LENGTH_LONG).show();
+        }
     }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+        Toast.makeText(getApplicationContext(), "Location position is disabled", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+        Toast.makeText(getApplicationContext(), "Location position is enabled", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+        Toast.makeText(getApplicationContext(), "Position is changed", Toast.LENGTH_LONG).show();
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
