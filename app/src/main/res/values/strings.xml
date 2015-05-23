@@ -6,6 +6,10 @@
     <string name="title_activity_add_refuel">AddRefuelActivity</string>
 
     <string name="hello_world">Hello world!</string>
-    <string name="lay_add_refuel_photo_btn">Add photo</string>
+    <string name="lay_add_refuel_photo_reciept_btn">Add photo</string>
     <string name="lay_add_refuel_distance">Distance</string>
+    <string name="lay_add_refuel_price">Price</string>
+    <string name="lay_add_refuel_paid">Paid</string>
+    <string name="lay_add_refuel_quantity">Quantity</string>
+    <string name="lay_add_refuel_add_station_btn">Add station</string>
 </resources>

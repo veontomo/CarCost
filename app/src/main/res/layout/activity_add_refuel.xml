@@ -13,24 +13,106 @@
         android:text="@string/lay_add_refuel_distance"
         android:id="@+id/lay_add_refuel_distance"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_margin="10dp"/>
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
-        android:id="@+id/lay_add_refuel_km_input"
+        android:id="@+id/lay_add_refuel_distance_input"
         android:layout_toRightOf="@id/lay_add_refuel_distance"
         android:layout_toEndOf="@id/lay_add_refuel_distance" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/lay_add_refuel_price"
+        android:id="@+id/lay_add_refuel_price"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/lay_add_refuel_distance"
+        android:layout_margin="10dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/lay_add_refuel_price_input"
+        android:layout_toRightOf="@id/lay_add_refuel_price"
+        android:layout_toEndOf="@id/lay_add_refuel_price"
+        android:layout_below="@id/lay_add_refuel_distance_input"
+        android:layout_alignLeft="@id/lay_add_refuel_distance_input"
+        android:layout_alignStart="@id/lay_add_refuel_distance_input"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/lay_add_refuel_paid"
+        android:id="@+id/lay_add_refuel_paid"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/lay_add_refuel_price"
+        android:layout_margin="10dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/lay_add_refuel_paid_input"
+        android:layout_toRightOf="@id/lay_add_refuel_paid"
+        android:layout_toEndOf="@id/lay_add_refuel_paid"
+        android:layout_below="@id/lay_add_refuel_price_input"
+        android:layout_alignLeft="@id/lay_add_refuel_price_input"
+        android:layout_alignStart="@id/lay_add_refuel_price_input"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/lay_add_refuel_quantity"
+        android:id="@+id/lay_add_refuel_quantity"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/lay_add_refuel_paid"
+        android:layout_margin="10dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/lay_add_refuel_quantity_input"
+        android:layout_toRightOf="@id/lay_add_refuel_quantity"
+        android:layout_toEndOf="@id/lay_add_refuel_quantity"
+        android:layout_below="@id/lay_add_refuel_paid_input"
+        android:layout_alignLeft="@id/lay_add_refuel_paid_input"
+        android:layout_alignStart="@id/lay_add_refuel_paid_input"/>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/lay_add_refuel_photo_btn"
-        android:id="@+id/lay_add_refuel_photo"
-        android:layout_below="@id/lay_add_refuel_distance"
+        android:text="@string/lay_add_refuel_photo_reciept_btn"
+        android:id="@+id/lay_add_reciept_photo"
+        android:layout_below="@id/lay_add_refuel_quantity"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_margin="20dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lay_add_refuel_add_station_btn"
+        android:id="@+id/lay_add_station_photo"
+        android:layout_toRightOf="@id/lay_add_reciept_photo"
+        android:layout_toEndOf="@id/lay_add_reciept_photo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/lay_add_reciept_photo"
         android:layout_margin="20dp"/>
 
 

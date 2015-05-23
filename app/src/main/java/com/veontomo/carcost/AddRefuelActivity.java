@@ -3,7 +3,6 @@ package com.veontomo.carcost;
 import android.app.Activity;
 import android.content.Intent;
 import android.provider.MediaStore;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -23,7 +22,7 @@ public class AddRefuelActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_refuel);
 
-        Button addPhoto = (Button) findViewById(R.id.lay_add_refuel_photo);
+        Button addPhoto = (Button) findViewById(R.id.lay_add_reciept_photo);
         addPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
