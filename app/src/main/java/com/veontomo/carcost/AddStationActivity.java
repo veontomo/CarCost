@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 
 
 public class AddStationActivity extends Activity implements LocationListener{
@@ -57,11 +58,20 @@ public class AddStationActivity extends Activity implements LocationListener{
         latText.setText(String.valueOf(location.getLatitude()));
         longText.setText(String.valueOf(location.getLongitude()));
         Log.i(TAG, "lat: " + String.valueOf(location.getLatitude()) + ", long: " + String.valueOf(location.getLongitude()));
-        Geocoder geo = new Geocoder(getApplicationContext());
+        Geocoder geo = new Geocoder(getApplicationContext(), Locale.ITALY);
         try {
-            List<Address> address = geo.getFromLocation(location.getLatitude(), location.getLongitude(), 4);
+            List<Address> address = geo.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+            int MAX = 10;
+            int counter = 0;
+            while(address.size() == 0 && counter < MAX){
+                address = geo.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+                Log.i(TAG, "iteration " + String.valueOf(counter));
+
+                counter++;
+
+            }
             TextView addr = (TextView) findViewById(R.id.lay_add_station_alt);
-            Toast.makeText(getApplicationContext(), "address", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "address size " + String.valueOf(address.size()), Toast.LENGTH_LONG).show();
             if (address.size() > 0){
                 addr.setText(address.get(0).toString());
             } else {
