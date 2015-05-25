@@ -13,9 +13,9 @@
     <string name="lay_add_refuel_quantity">Quantity</string>
     <string name="lay_add_refuel_add_station_btn">Add station</string>
     <string name="title_activity_add_station">AddStationActivity</string>
-    <string name="lay_add_station_addr_text">Address</string>
+    <string name="lay_add_station_street_text">Street</string>
     <string name="lay_add_station_name_hint">how do you call it</string>
-    <string name="lay_add_station_address_hint">geographical position</string>
+    <string name="lay_add_station_street_hint">street</string>
     <string name="lay_add_station_add_location">Use current position</string>
     <string name="lay_add_station_save_station">Save</string>
     <string name="lay_add_station_cancel_station">Cancel</string>
@@ -31,4 +31,8 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="coordinates">Coordinated</string>
+    <string name="lay_add_station_country_text">Country</string>
+    <string name="lay_add_station_building_text">Building</string>
+    <string name="lay_add_station_building_hint">no</string>
+    <string name="lay_add_station_country_hint">country name</string>
 </resources>
