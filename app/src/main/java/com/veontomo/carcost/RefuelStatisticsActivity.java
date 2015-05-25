@@ -26,6 +26,16 @@ public class RefuelStatisticsActivity extends Activity {
                 startActivity(intent);
             }
         });
+
+
+        Button location = (Button) findViewById(R.id.lay_refuel_statistics_start_location);
+        location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), LocationActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
