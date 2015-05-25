@@ -16,11 +16,18 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
     <ImageView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/lay_refuel_statistics_chart"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="start location"
+        android:id="@+id/lay_refuel_statistics_start_location"
+        android:layout_below="@id/lay_refuel_statistics_chart" />
 
 
 

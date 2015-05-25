@@ -1,41 +1,17 @@
 package com.veontomo.carcost;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 
-public class RefuelStatisticsActivity extends Activity {
+public class StatisticsActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_refuel_statistics);
-
-        Button addData = (Button) findViewById(R.id.lay_refuel_statistics_add_data);
-
-        addData.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AddRefuelActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
-        Button location = (Button) findViewById(R.id.lay_refuel_statistics_start_location);
-        location.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), LocationActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     @Override

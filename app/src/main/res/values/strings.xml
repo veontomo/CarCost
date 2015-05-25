@@ -24,4 +24,11 @@
     <string name="lay_add_station_location">Coordinates</string>
     <string name="lay_add_station_lat">latitude</string>
     <string name="lay_add_station_long">longitude</string>
+    <string name="station_address_text">Address</string>
+    <string name="station_photo_button">Add photo</string>
+    <string name="station_name_text">Name</string>
+    <string name="title_activity_location">LocationActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="coordinates">Coordinated</string>
 </resources>

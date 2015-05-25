@@ -16,6 +16,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
@@ -26,6 +29,9 @@ public class AddStationActivity extends Activity implements LocationListener{
     private static final String TAG = "CarCost";
     protected Context context = this;
     protected LocationListener locationListener;
+
+    private GoogleApiClient mGoogleApiClient;
+
 
     private TextView latText;
     private TextView longText;
@@ -51,7 +57,10 @@ public class AddStationActivity extends Activity implements LocationListener{
 
             }
         });
+
     }
+
+
 
     @Override
     public void onLocationChanged(Location location) {
