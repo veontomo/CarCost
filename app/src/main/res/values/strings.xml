@@ -35,4 +35,6 @@
     <string name="lay_add_station_building_text">Building</string>
     <string name="lay_add_station_building_hint">no</string>
     <string name="lay_add_station_country_hint">country name</string>
+    <string name="lay_add_station_city_text">City</string>
+    <string name="lay_add_station_city_hint">City</string>
 </resources>

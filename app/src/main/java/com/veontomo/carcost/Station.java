@@ -23,15 +23,84 @@ public class Station {
     private Float longitude;
 
 
+    public String getDistributor() {
+        return distributor;
+    }
 
+    public void setDistributor(String distributor) {
+        this.distributor = distributor;
+    }
 
-    public Station(Context context, String name, String distributor, String country, String street, String building){
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getBuilding() {
+        return building;
+    }
+
+    public void setBuilding(String building) {
+        this.building = building;
+    }
+
+    public Float getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Float latitude) {
+        this.latitude = latitude;
+    }
+
+    public Float getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Float longitude) {
+        this.longitude = longitude;
+    }
+
+    public Station(Context mContext) {
+
+        this.mContext = mContext;
+    }
+
+    public Station(Context context, String name, String distributor, String country, String street, String city, String building){
         this.mContext = context;
         this.name = name;
         this.distributor = distributor;
         this.country = country;
         this.street = street;
         this.building = building;
+        this.city = city;
+
     }
 
     public void save(){
