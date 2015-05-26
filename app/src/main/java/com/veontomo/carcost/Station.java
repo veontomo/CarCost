@@ -93,7 +93,7 @@ public class Station {
         this.mContext = mContext;
     }
 
-    public Station(Context context, String name, String distributor, String country, String street, String city, String building) {
+    public Station(Context context, String name, String distributor, String country, String city, String street, String building) {
         this.mContext = context;
         this.name = name;
         this.distributor = distributor;
@@ -106,7 +106,7 @@ public class Station {
 
     public void save() {
         Storage storage = new Storage(this.mContext);
-        storage.save();
+        storage.save(this.name, this.distributor, this.country, this.city, this.street, this.building, this.latitude, this.longitude);
 
     }
 
@@ -162,10 +162,17 @@ public class Station {
             this.onCreate(db);
         }
 
-        public void save() {
+        public void save(String name, String distributor, String country,  String city, String street, String building, Float lat, Float lon) {
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues values = new ContentValues();
-            values.put(DISTRIBUTOR_COL_NAME, "Q8");
+            values.put(NAME_COL_NAME, name);
+            values.put(DISTRIBUTOR_COL_NAME, distributor);
+            values.put(COUNTRY_COL_NAME, country);
+            values.put(STREET_COL_NAME, street);
+            values.put(BUILDING_COL_NAME, building);
+            values.put(CITY_COL_NAME, city);
+            values.put(LONGITUDE_COL_NAME, lon);
+            values.put(LATITUDE_COL_NAME, lat);
             db.insert(TABLE_NAME,
                     null,
                     values);

@@ -67,7 +67,7 @@ public class AddStationActivity extends Activity implements LocationListener{
             @Override
             public void onClick(View v) {
                 EditText nameText = (EditText) findViewById(R.id.lay_add_station_name_input);
-                Station station = new Station(getApplicationContext());
+                Station station = new Station(getApplicationContext(), "near home", "Agip", "Italy", "Rome", "Cavour", "44");
                 station.save();
             }
         });
