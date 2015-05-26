@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,6 +56,19 @@ public class AddStationActivity extends Activity implements LocationListener{
             public void onClick(View v) {
 
 
+            }
+        });
+
+
+        Button saveBtn = (Button) findViewById(R.id.lay_add_station_save_btn);
+        Button cancelBtn = (Button) findViewById(R.id.lay_add_station_cancel_btn);
+
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText nameText = (EditText) findViewById(R.id.lay_add_station_name_input);
+                Station station = new Station(getApplicationContext());
+                station.save();
             }
         });
 

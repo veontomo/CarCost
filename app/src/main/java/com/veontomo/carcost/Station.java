@@ -1,5 +1,6 @@
 package com.veontomo.carcost;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -92,7 +93,7 @@ public class Station {
         this.mContext = mContext;
     }
 
-    public Station(Context context, String name, String distributor, String country, String street, String city, String building){
+    public Station(Context context, String name, String distributor, String country, String street, String city, String building) {
         this.mContext = context;
         this.name = name;
         this.distributor = distributor;
@@ -103,8 +104,9 @@ public class Station {
 
     }
 
-    public void save(){
+    public void save() {
         Storage storage = new Storage(this.mContext);
+        storage.save();
 
     }
 
@@ -157,9 +159,17 @@ public class Station {
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older books table if existed
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-
-            // create fresh books table
             this.onCreate(db);
+        }
+
+        public void save() {
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put(DISTRIBUTOR_COL_NAME, "Q8");
+            db.insert(TABLE_NAME,
+                    null,
+                    values);
+            db.close();
         }
 
     }

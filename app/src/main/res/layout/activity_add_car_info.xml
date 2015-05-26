@@ -46,7 +46,7 @@
         android:layout_alignBaseline="@id/lay_add_car_manufacturer_text"
         android:layout_toRightOf="@id/lay_add_car_manufacturer_text"
         android:layout_toEndOf="@id/lay_add_car_manufacturer_text"
-        android:layout_a="@+id/lay_add_car_name_edit" />
+        android:layout_below="@+id/lay_add_car_name_edit" />
 
     <TextView
         android:layout_width="wrap_content"
