@@ -56,14 +56,14 @@ public class AddRefuelActivity extends Activity
             if (resultCode == RESULT_OK) {
                 Toast.makeText(getApplicationContext(), "photo recieved and saved to " + data.getExtras(), Toast.LENGTH_LONG).show();
             } else {
-                Toast.makeText(getApplicationContext(), "photo is NOT recieved", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "photo is NOT received", Toast.LENGTH_LONG).show();
             }
         }
         if (requestCode == ADD_STATION_REQUEST){
             if (resultCode == RESULT_OK) {
                 Toast.makeText(getApplicationContext(), "station is added", Toast.LENGTH_LONG).show();
             } else {
-                Toast.makeText(getApplicationContext(), "station is NOT recieved", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "station is NOT received", Toast.LENGTH_LONG).show();
             }
 
         }

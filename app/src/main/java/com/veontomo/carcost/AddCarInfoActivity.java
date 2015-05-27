@@ -1,12 +1,12 @@
 package com.veontomo.carcost;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class AddCarInfoActivity extends ActionBarActivity {
+public class AddCarInfoActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

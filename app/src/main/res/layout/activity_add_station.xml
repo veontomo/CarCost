@@ -84,7 +84,8 @@
         android:layout_toEndOf="@id/lay_add_station_alt"
         android:layout_alignBaseline="@id/lay_add_station_coordinate_text"
         android:id="@+id/lay_add_station_long"
-        android:layout_marginLeft="10dp"/>
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"/>
     <TextView
         android:id="@+id/lay_add_station_street_text"
         android:layout_width="90dp"
@@ -101,6 +102,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@id/lay_add_station_name_input"
+        android:layout_alignStart="@id/lay_add_station_name_input"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_below="@id/lay_add_station_coordinate_text"
@@ -125,6 +127,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@id/lay_add_station_name_input"
+        android:layout_alignStart="@id/lay_add_station_name_input"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_below="@id/lay_add_station_street_text"
@@ -151,6 +154,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@id/lay_add_station_name_input"
+        android:layout_alignStart="@id/lay_add_station_name_input"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_below="@id/lay_add_station_building_text"
@@ -178,6 +182,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@id/lay_add_station_building_input"
+        android:layout_alignStart="@id/lay_add_station_building_input"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_below="@id/lay_add_station_city_text"
