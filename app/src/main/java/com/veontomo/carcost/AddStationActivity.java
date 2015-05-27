@@ -88,6 +88,7 @@ public class AddStationActivity extends Activity implements LocationListener{
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "adding station is cancelled", Toast.LENGTH_LONG).show();
+                finish();
             }
         });
 

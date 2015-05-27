@@ -55,4 +55,8 @@
     <string name="lay_add_refuel_station_text">Station</string>
     <string name="lay_add_refuel_cancel_btn">Cancel</string>
     <string name="lay_add_refuel_save_btn">Save</string>
+    <string name="lay_add_refuel_distance_hint">odometer reading</string>
+    <string name="lay_add_refuel_price_hint">cost of a unit of the fuel</string>
+    <string name="lay_add_refuel_paid_hint">total amount paid</string>
+    <string name="lay_add_refuel_quantity_hint">how many units of fuel are added</string>
 </resources>
