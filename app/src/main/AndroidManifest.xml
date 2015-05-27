@@ -24,6 +24,19 @@
             android:label="@string/title_activity_add_refuel" >
         </activity>
         <activity
+            android:name=".AddCarInfoActivity"
+            android:label="@string/title_activity_add_car_info" >
+        </activity>
+        <activity
+            android:name=".StationActivity"
+            android:label="@string/title_activity_station" >
+        </activity>
+        <activity
+            android:name=".StatisticsActivity"
+            android:label="@string/title_activity_statistics" >
+        </activity>
+
+        <activity
             android:name=".AddStationActivity"
             android:label="@string/title_activity_add_station" >
         </activity>

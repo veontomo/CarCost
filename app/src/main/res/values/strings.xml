@@ -49,4 +49,7 @@
     <string name="lay_add_car_model_hint">320i, AMG, Panda</string>
     <string name="lay_add_car_cancel_btn">Cancel</string>
     <string name="lay_add_car_save_btn">Save</string>
+    <string name="title_activity_add_car_info">Car details</string>
+    <string name="title_activity_station">Station Details</string>
+    <string name="title_activity_statistics">Your car refuel statistics</string>
 </resources>
