@@ -22,7 +22,7 @@ public class Refuel {
         this.distance = distance;
         this.stationId = stationId;
 
-        validate(price, paid, quantity);
+        setTriple(price, paid, quantity);
 
         if (!isValid(this.price, this.paid, this.quantity)){
             throw new Exception("Wrong price-paid-quantity");
@@ -38,7 +38,7 @@ public class Refuel {
      * @param paid
      * @param quantity
      */
-    private void validate(Double price, Double paid, Double quantity) {
+    private void setTriple(Double price, Double paid, Double quantity) {
         if (price == null){
             if (paid != null && quantity != null && quantity != 0){
                 this.price = paid/quantity;
