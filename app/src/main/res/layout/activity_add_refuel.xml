@@ -94,12 +94,35 @@
         android:layout_alignLeft="@id/lay_add_refuel_paid_input"
         android:layout_alignStart="@id/lay_add_refuel_paid_input" />
 
+    <TextView android:id="@+id/lay_add_refuel_station_text"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/lay_add_refuel_quantity"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:text="@string/lay_add_refuel_station_text"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_margin="10dp"
+        />
+
+    <Spinner
+        android:id="@+id/lay_add_refuel_station_spinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/lay_add_refuel_quantity_input"
+        android:layout_alignLeft="@id/lay_add_refuel_quantity_input"
+        android:layout_below="@id/lay_add_refuel_quantity_input"
+        android:layout_toRightOf="@id/lay_add_refuel_station_text"
+        android:layout_toEndOf="@id/lay_add_refuel_station_text"
+        android:layout_alignTop="@id/lay_add_refuel_station_text"
+        />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/lay_add_refuel_photo_receipt_btn"
         android:id="@+id/lay_add_receipt_photo"
-        android:layout_below="@id/lay_add_refuel_quantity"
+        android:layout_below="@id/lay_add_refuel_station_text"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_margin="20dp"/>
@@ -108,7 +131,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/lay_add_refuel_add_station_btn"
-        android:id="@+id/lay_add_station"
+        android:id="@+id/lay_add_station_btn"
         android:layout_toRightOf="@id/lay_add_receipt_photo"
         android:layout_toEndOf="@id/lay_add_receipt_photo"
         android:layout_alignParentLeft="true"
@@ -116,6 +139,25 @@
         android:layout_below="@id/lay_add_receipt_photo"
         android:layout_margin="20dp"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lay_add_refuel_cancel_btn"
+        android:id="@+id/lay_add_refuel_cancel_btn"
+        android:layout_below="@id/lay_add_station_btn"
+        android:layout_margin="5dp"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lay_add_refuel_save_btn"
+        android:id="@+id/lay_add_car_save_btn"
+        android:layout_alignBaseline="@id/lay_add_refuel_cancel_btn"
+        android:layout_toRightOf="@id/lay_add_refuel_cancel_btn"
+        android:layout_toEndOf="@id/lay_add_refuel_cancel_btn"
+        android:layout_margin="5dp"
+        />
 
 
 </RelativeLayout>

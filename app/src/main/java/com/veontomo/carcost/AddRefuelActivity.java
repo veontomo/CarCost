@@ -38,7 +38,7 @@ public class AddRefuelActivity extends Activity
             }
         });
 
-        Button addStation = (Button) findViewById(R.id.lay_add_station);
+        Button addStation = (Button) findViewById(R.id.lay_add_station_btn);
         addStation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

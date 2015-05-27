@@ -52,4 +52,7 @@
     <string name="title_activity_add_car_info">Car details</string>
     <string name="title_activity_station">Station Details</string>
     <string name="title_activity_statistics">Your car refuel statistics</string>
+    <string name="lay_add_refuel_station_text">Station</string>
+    <string name="lay_add_refuel_cancel_btn">Cancel</string>
+    <string name="lay_add_refuel_save_btn">Save</string>
 </resources>
