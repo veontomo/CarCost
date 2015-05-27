@@ -6,7 +6,7 @@
     <string name="title_activity_add_refuel">AddRefuelActivity</string>
 
     <string name="lay_add_station_name_text">Name</string>
-    <string name="lay_add_refuel_photo_reciept_btn">Add photo</string>
+    <string name="lay_add_refuel_photo_receipt_btn">Add photo</string>
     <string name="lay_add_refuel_distance">Distance</string>
     <string name="lay_add_refuel_price">Price</string>
     <string name="lay_add_refuel_paid">Paid</string>
@@ -20,7 +20,7 @@
     <string name="lay_add_station_save_station">Save</string>
     <string name="lay_add_station_cancel_station">Cancel</string>
     <string name="lay_add_station_distributor_text">Distributor</string>
-    <string name="lay_add_station_distributor_hint">Q8, Agip, Esso, Tamoil etc</string>
+    <string name="lay_add_station_distributor_hint">distributor name</string>
     <string name="lay_add_station_location">Coordinates</string>
     <string name="lay_add_station_lat">latitude</string>
     <string name="lay_add_station_long">longitude</string>
@@ -29,7 +29,6 @@
     <string name="station_name_text">Name</string>
     <string name="title_activity_location">LocationActivity</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="coordinates">Coordinated</string>
     <string name="lay_add_station_country_text">Country</string>
     <string name="lay_add_station_building_text">Building</string>
@@ -37,4 +36,17 @@
     <string name="lay_add_station_country_hint">country name</string>
     <string name="lay_add_station_city_text">City</string>
     <string name="lay_add_station_city_hint">City</string>
+    <string name="lay_refuel_statistics_chart_description">dynamics of your car consumption</string>
+    <string name="lay_add_car_name_text">Name</string>
+    <string name="lay_add_car_name_hint">short name</string>
+    <string name="lay_location_latitude">lat</string>
+    <string name="lay_location_longitude">long</string>
+    <string name="lay_refuel_statistics_add_station">add station</string>
+    <string name="lay_refuel_statistics_start_location">start location</string>
+    <string name="lay_add_car_manufacturer_text">Manufacturer</string>
+    <string name="lay_add_car_manufacturer_hint">BMW, Mercedes, FIAT</string>
+    <string name="lay_add_car_model_text">Model</string>
+    <string name="lay_add_car_model_hint">320i, AMG, Panda</string>
+    <string name="lay_add_car_cancel_btn">Cancel</string>
+    <string name="lay_add_car_save_btn">Save</string>
 </resources>

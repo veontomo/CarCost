@@ -97,7 +97,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/lay_add_refuel_photo_reciept_btn"
+        android:text="@string/lay_add_refuel_photo_receipt_btn"
         android:id="@+id/lay_add_reciept_photo"
         android:layout_below="@id/lay_add_refuel_quantity"
         android:layout_alignParentLeft="true"

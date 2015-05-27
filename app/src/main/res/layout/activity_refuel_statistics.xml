@@ -20,19 +20,20 @@
         android:layout_height="wrap_content"
         android:id="@+id/lay_refuel_statistics_chart"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/lay_refuel_statistics_chart_description"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="start location"
+        android:text="@string/lay_refuel_statistics_start_location"
         android:id="@+id/lay_refuel_statistics_start_location"
         android:layout_below="@id/lay_refuel_statistics_chart" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="add station"
+        android:text="@string/lay_refuel_statistics_add_station"
         android:id="@+id/lay_refuel_statistics_add_station"
         android:layout_below="@id/lay_refuel_statistics_start_location" />
 
