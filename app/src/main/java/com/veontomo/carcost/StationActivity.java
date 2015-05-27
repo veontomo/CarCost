@@ -46,9 +46,9 @@ public class StationActivity extends Activity {
         if (requestCode == TAKE_PHOTO_REQUEST) {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
-                Toast.makeText(getApplicationContext(), "photo recieved and saved to " + data.getExtras(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "photo received and saved to " + data.getExtras(), Toast.LENGTH_LONG).show();
             } else {
-                Toast.makeText(getApplicationContext(), "photo is NOT recieved", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "photo is NOT received", Toast.LENGTH_LONG).show();
             }
         }
     }

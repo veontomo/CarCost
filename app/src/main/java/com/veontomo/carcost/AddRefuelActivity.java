@@ -23,7 +23,7 @@ public class AddRefuelActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_refuel);
 
-        Button addPhoto = (Button) findViewById(R.id.lay_add_reciept_photo);
+        Button addPhoto = (Button) findViewById(R.id.lay_add_receipt_photo);
         addPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,7 +54,7 @@ public class AddRefuelActivity extends Activity
         if (requestCode == TAKE_PHOTO_REQUEST) {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
-                Toast.makeText(getApplicationContext(), "photo recieved and saved to " + data.getExtras(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "photo received and saved to " + data.getExtras(), Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(getApplicationContext(), "photo is NOT received", Toast.LENGTH_LONG).show();
             }

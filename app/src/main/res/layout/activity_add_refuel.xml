@@ -98,7 +98,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/lay_add_refuel_photo_receipt_btn"
-        android:id="@+id/lay_add_reciept_photo"
+        android:id="@+id/lay_add_receipt_photo"
         android:layout_below="@id/lay_add_refuel_quantity"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -109,11 +109,11 @@
         android:layout_height="wrap_content"
         android:text="@string/lay_add_refuel_add_station_btn"
         android:id="@+id/lay_add_station"
-        android:layout_toRightOf="@id/lay_add_reciept_photo"
-        android:layout_toEndOf="@id/lay_add_reciept_photo"
+        android:layout_toRightOf="@id/lay_add_receipt_photo"
+        android:layout_toEndOf="@id/lay_add_receipt_photo"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@id/lay_add_reciept_photo"
+        android:layout_below="@id/lay_add_receipt_photo"
         android:layout_margin="20dp"/>
 
 

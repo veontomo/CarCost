@@ -67,7 +67,7 @@ public class AddStationActivity extends Activity implements LocationListener{
             @Override
             public void onClick(View v) {
                 EditText nameText = (EditText) findViewById(R.id.lay_add_station_name_input);
-                Station station = new Station(getApplicationContext(), nameText.getEditableText().toString(), "Agip", "Italy", "Rome", "Cavour", "44");
+                Station station = new Station(getApplicationContext(), nameText.getEditableText().toString(), "Shell", "Italy", "Rome", "Cavour", "44");
                 station.save();
             }
         });
@@ -100,10 +100,10 @@ public class AddStationActivity extends Activity implements LocationListener{
                 counter++;
 
             }
-            TextView address = (TextView) findViewById(R.id.lay_add_station_alt);
+            TextView addressText = (TextView) findViewById(R.id.lay_add_station_alt);
             Toast.makeText(getApplicationContext(), "address size " + String.valueOf(address.size()), Toast.LENGTH_LONG).show();
             if (address.size() > 0){
-                address.setText(address.get(0).toString());
+                addressText.setText(address.get(0).toString());
             } else {
                 Toast.makeText(getApplicationContext(), "no address", Toast.LENGTH_LONG).show();
             }
