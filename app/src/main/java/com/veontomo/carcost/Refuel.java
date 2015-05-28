@@ -17,63 +17,45 @@ public class Refuel {
     private Integer stationId;
     private Context mContext;
 
-    public void Refuel(Context context, Float distance, Double price, Double paid, Double quantity, Integer stationId) throws Exception {
+    public Refuel(Context context, Float distance, Double price, Double paid, Double quantity, Integer stationId) throws Exception {
         this.mContext = context;
         this.distance = distance;
         this.stationId = stationId;
-
         setTriple(price, paid, quantity);
-
-        if (!isValid(this.price, this.paid, this.quantity)){
-            throw new Exception("Wrong price-paid-quantity");
-        }
-
     }
 
     /**
-     * Sets three numbers in such a way that they are related by the
-     * following relation: paid = price * amount. If some of the input is
-     * missing, then it is derived from the above relation.
-     * @param price
-     * @param paid
-     * @param quantity
+     * Sets  price, paid and quantity. If one of them is missing, calculates it from the
+     * following relation: paid = price * amount.
+     *
+     * @param price   cost of unit of a fuel
+     * @param paid    total amount paid
+     * @param quantity units of fuel bought
      */
     private void setTriple(Double price, Double paid, Double quantity) {
-        if (price == null){
-            if (paid != null && quantity != null && quantity != 0){
-                this.price = paid/quantity;
-                this.paid = paid;
-                this.quantity = quantity;
-            }
-        } else if (paid == null){
-            if (price != null && quantity != null){
-                this.paid = price*quantity;
-                this.price = price;
-                this.quantity = quantity;
-            }
-        } else if (quantity == null){
-            if (price != null && price != 0 && paid != null){
-                this.paid = paid;
-                this.price = price;
-                this.quantity = paid/price;
-            }
-        } else {
-            this.paid = paid;
-            this.price = price;
-            this.quantity = quantity;
+        // raw data
+        this.paid = paid;
+        this.price = price;
+        this.quantity = quantity;
+
+        // deriving missing data if possible
+        if (price == null && paid != null && quantity != null && quantity != 0) {
+            this.price = paid / quantity;
+        } else if (paid == null && price != null && quantity != null) {
+            this.paid = price * quantity;
+        } else if (quantity == null && price != null && price != 0 && paid != null) {
+            this.quantity = paid / price;
         }
     }
 
     /**
      * Returns true if the triple price-paid-quantity is set correctly (up to
      * given precision).
-     * @param price
-     * @param paid
-     * @param quantity
-     * @return
+     *
+     * @return  boolean
      */
-    private boolean isValid(Double price, Double paid, Double quantity) {
-        return Math.abs(paid - price*quantity) <= Math.abs(paid*PRECISION);
+    private boolean isValid() {
+        return Math.abs(this.paid - this.price * this.quantity) <= Math.abs(this.paid * PRECISION);
     }
 
 }

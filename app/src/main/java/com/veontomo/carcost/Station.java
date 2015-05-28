@@ -89,7 +89,6 @@ public class Station {
     }
 
     public Station(Context mContext) {
-
         this.mContext = mContext;
     }
 
