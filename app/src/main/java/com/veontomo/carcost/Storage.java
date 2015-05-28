@@ -148,10 +148,11 @@ class Storage extends SQLiteOpenHelper {
      * Returns names of stations present in database
      * @return list of station names
      */
-    public ArrayList<String> getStationNames() {
+    public ArrayList<String> loadStationNames() {
+        /// !!! stub
         ArrayList<String> names = new ArrayList<>();
-        names.add("Agip");
-        names.add("Q8");
+        names.add("station 1");
+        names.add("station 2");
         return names;
 
     }

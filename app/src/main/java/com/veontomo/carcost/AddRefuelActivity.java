@@ -79,7 +79,7 @@ public class AddRefuelActivity extends Activity {
 
         Storage storage = new Storage(getApplicationContext());
 
-        ArrayList<String> stations = storage.getStationNames();
+        ArrayList<String> stations = storage.loadStationNames();
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, stations);
 
         Spinner spinner = (Spinner)findViewById(R.id.lay_add_refuel_station_spinner);
