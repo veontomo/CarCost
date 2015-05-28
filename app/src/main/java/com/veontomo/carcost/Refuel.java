@@ -20,7 +20,7 @@ public class Refuel {
     private Integer stationId;
     private Context mContext;
 
-    public Refuel(Context context, Float distance, Double price, Double paid, Double quantity, Integer stationId) throws Exception {
+    public Refuel(Context context, Float distance, Double price, Double paid, Double quantity, Integer stationId){
         this.mContext = context;
         this.distance = distance;
         this.stationId = stationId;
@@ -110,6 +110,7 @@ public class Refuel {
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues values = new ContentValues();
             values.put(DISTANCE_COL_NAME, distance);
+            values.put(PRICE_COL_NAME, price);
             values.put(PAID_COL_NAME, paid);
             values.put(QUANTITY_COL_NAME, quantity);
             values.put(STATION_ID_COL_NAME, stationId);
