@@ -25,7 +25,7 @@ class Storage extends SQLiteOpenHelper {
     /**
      * Name of table that stores information about refuels
      */
-    private static final String REFUEL_TABLE_NAME = "Refuels";
+    private static final String REFUELS_TABLE_NAME = "Refuels";
 
     /**
      * Names of columns of the refuel table
@@ -70,14 +70,14 @@ class Storage extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         // SQL statement to create station table
-        String CREATE_REFUEL_TABLE_QUERY = "CREATE TABLE " + REFUEL_TABLE_NAME + "( " +
+        String CREATE_REFUEL_TABLE_QUERY = "CREATE TABLE " + REFUELS_TABLE_NAME + "( " +
                 REFUEL_ID_COL_NAME + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 REFUEL_DISTANCE_COL_NAME + " REAL, " +
                 REFUEL_PRICE_COL_NAME + " REAL, " +
                 REFUEL_PAID_COL_NAME + " REAL, " +
                 REFUEL_QUANTITY_COL_NAME + " REAL, " +
                 REFUEL_STATION_ID_COL_NAME + " INTEGER)";
-        Log.i(TAG, "Storage: creating table Refuel query " + CREATE_REFUEL_TABLE_QUERY);
+        Log.i(TAG, "Storage: creating table Refuel " + CREATE_REFUEL_TABLE_QUERY);
         db.execSQL(CREATE_REFUEL_TABLE_QUERY);
 
         String CREATE_STATION_TABLE_QUERY = "CREATE TABLE " + STATIONS_TABLE_NAME + "( " +
@@ -90,6 +90,7 @@ class Storage extends SQLiteOpenHelper {
                 STATIONS_CITY_COL_NAME + " VARCHAR( " + String.valueOf(STATIONS_CITY_SIZE) + "), " +
                 STATIONS_LONGITUDE_COL_NAME + " FLOAT, " +
                 STATIONS_LATITUDE_COL_NAME + " FLOAT )";
+        Log.i(TAG, "Storage: creating table Station " + CREATE_REFUEL_TABLE_QUERY);
 
         db.execSQL(CREATE_STATION_TABLE_QUERY);
     }
@@ -97,24 +98,47 @@ class Storage extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older books table if existed
-        db.execSQL("DROP TABLE IF EXISTS " + REFUEL_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + STATIONS_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + REFUELS_TABLE_NAME);
         this.onCreate(db);
     }
 
-    public long save(Float distance, Float price, Float paid, Float quantity, Integer stationId) {
-        Log.i(TAG, "save arguments: " + distance + ", " + price + ", " + paid + ", " + quantity + ", " + stationId);
+    public long save(Refuel refuel) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(REFUEL_DISTANCE_COL_NAME, distance);
-        values.put(REFUEL_PRICE_COL_NAME, price);
-        values.put(REFUEL_PAID_COL_NAME, paid);
-        values.put(REFUEL_QUANTITY_COL_NAME, quantity);
-        values.put(REFUEL_STATION_ID_COL_NAME, stationId);
-        long id = db.insert(REFUEL_TABLE_NAME,
+        values.put(REFUEL_DISTANCE_COL_NAME, refuel.getDistance());
+        values.put(REFUEL_PRICE_COL_NAME, refuel.getPrice());
+        values.put(REFUEL_PAID_COL_NAME, refuel.getPaid());
+        values.put(REFUEL_QUANTITY_COL_NAME, refuel.getQuantity());
+        values.put(REFUEL_STATION_ID_COL_NAME, refuel.getStationId());
+        long id = db.insert(REFUELS_TABLE_NAME,
                 null,
                 values);
         db.close();
         return id;
     }
 
+
+
+
+
+    public long save(Station station) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(STATIONS_NAME_COL_NAME, station.getName());
+        values.put(STATIONS_DISTRIBUTOR_COL_NAME, station.getDistributor());
+        values.put(STATIONS_COUNTRY_COL_NAME, station.getCountry());
+        values.put(STATIONS_STREET_COL_NAME, station.getStreet());
+        values.put(STATIONS_BUILDING_COL_NAME, station.getBuilding());
+        values.put(STATIONS_CITY_COL_NAME, station.getCity());
+        values.put(STATIONS_LONGITUDE_COL_NAME, station.getLatitude());
+        values.put(STATIONS_LATITUDE_COL_NAME, station.getLongitude());
+        long id = db.insert(STATIONS_TABLE_NAME,
+                null,
+                values);
+        db.close();
+        return id;
+
+
+    }
 }

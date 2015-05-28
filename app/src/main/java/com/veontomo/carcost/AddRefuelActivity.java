@@ -39,8 +39,11 @@ public class AddRefuelActivity extends Activity {
                         Float.parseFloat(paidText.getEditableText().toString()),
                         Float.parseFloat(quantityText.getEditableText().toString()),
                         stationText.getId());
-                long id = refuel.save();
-                Toast.makeText(getApplicationContext(), "Record is saved with id " + String.valueOf(id), Toast.LENGTH_LONG).show();
+
+                Storage storage = new Storage(getApplicationContext());
+                storage.save(refuel);
+                long id =  storage.save(refuel);
+                Toast.makeText(getApplicationContext(), "Refuel is saved with id " + String.valueOf(id), Toast.LENGTH_LONG).show();
                 finish();
 
             }

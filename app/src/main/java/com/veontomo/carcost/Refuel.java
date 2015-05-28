@@ -13,6 +13,10 @@ import android.util.Log;
  * @since 0.1
  */
 public class Refuel {
+    /**
+     * id with which an instance of this class is saved in database
+     */
+    private long id;
     private static final Double PRECISION = 0.001;
     private Float distance;
     private Float price;
@@ -30,6 +34,46 @@ public class Refuel {
         this.distance = distance;
         this.stationId = stationId;
         setTriple(price, paid, quantity);
+    }
+
+    public Float getDistance() {
+        return distance;
+    }
+
+    public void setDistance(Float distance) {
+        this.distance = distance;
+    }
+
+    public Float getPaid() {
+        return paid;
+    }
+
+    public void setPaid(Float paid) {
+        this.paid = paid;
+    }
+
+    public Float getPrice() {
+        return price;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
+    }
+
+    public Float getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Float quantity) {
+        this.quantity = quantity;
+    }
+
+    public Integer getStationId() {
+        return stationId;
+    }
+
+    public void setStationId(Integer stationId) {
+        this.stationId = stationId;
     }
 
     /**
@@ -66,12 +110,6 @@ public class Refuel {
         return Math.abs(this.paid - this.price * this.quantity) <= Math.abs(this.paid * PRECISION);
     }
 
-    public long save() {
-        Log.i(TAG, "Refuel class: call saving... " );
-        Storage storage = new Storage(this.mContext);
-        return storage.save(this.distance, this.price, this.paid, this.quantity, this.stationId);
-
-    }
 
 
 

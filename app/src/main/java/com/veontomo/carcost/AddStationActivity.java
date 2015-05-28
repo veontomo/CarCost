@@ -79,10 +79,15 @@ public class AddStationActivity extends Activity implements LocationListener{
                         cityText.getEditableText().toString(),
                         streetText.getEditableText().toString(),
                         buildingText.getEditableText().toString());
-                station.save();
+
+                Storage storage = new Storage(getApplicationContext());
+                long id = storage.save(station);
+                Toast.makeText(getApplicationContext(), "Station is saved with id " + String.valueOf(id), Toast.LENGTH_LONG).show();
                 finish();
             }
         });
+
+
 
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override

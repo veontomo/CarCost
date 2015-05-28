@@ -12,6 +12,11 @@ import android.database.sqlite.SQLiteOpenHelper;
  * @since 0.1
  */
 public class Station {
+    /**
+     * id with which an instance of this class is saved in database
+     */
+    private long id;
+
     private Context mContext;
 
     private String distributor;
