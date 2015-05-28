@@ -23,6 +23,8 @@ public class Refuel {
 
     private final String TAG = "CarCost";
 
+
+
     public Refuel(Context context, Float distance, Float price, Float paid, Float quantity, Integer stationId){
         this.mContext = context;
         this.distance = distance;
@@ -71,62 +73,6 @@ public class Refuel {
 
     }
 
-    class Storage extends SQLiteOpenHelper {
-        // Database Version
-        private static final int DATABASE_VERSION = 2;
-        // Database Name
-        private static final String DATABASE_NAME = "CarCost";
 
-        private static final String TABLE_NAME = "Refuels";
-
-        private static final String ID_COL_NAME = "id";
-        private static final String DISTANCE_COL_NAME = "distance";
-        private static final String PRICE_COL_NAME = "price";
-        private static final String PAID_COL_NAME = "paid";
-        private static final String QUANTITY_COL_NAME = "quantity";
-        private static final String STATION_ID_COL_NAME = "station_id";
-
-        public Storage(Context context) {
-            super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        }
-
-        @Override
-        public void onCreate(SQLiteDatabase db) {
-            // SQL statement to create station table
-            String CREATE_TABLE_QUERY = "CREATE TABLE " + TABLE_NAME + "( " +
-                    ID_COL_NAME + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    DISTANCE_COL_NAME + " REAL, " +
-                    PRICE_COL_NAME + " REAL, " +
-                    PAID_COL_NAME + " REAL, " +
-                    QUANTITY_COL_NAME + " REAL, " +
-                    STATION_ID_COL_NAME + " INTEGER)";
-            Log.i(TAG, "Refuel class: executing query " + CREATE_TABLE_QUERY);
-            db.execSQL(CREATE_TABLE_QUERY);
-        }
-
-        @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            // Drop older books table if existed
-            db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-            this.onCreate(db);
-        }
-
-        public long save(Float distance, Float price, Float paid, Float quantity, Integer stationId) {
-            Log.i(TAG, "save arguments: " + distance + ", " + price + ", " + paid + ", " + quantity + ", " + stationId);
-            SQLiteDatabase db = this.getWritableDatabase();
-            ContentValues values = new ContentValues();
-            values.put(DISTANCE_COL_NAME, distance);
-            values.put(PRICE_COL_NAME, price);
-            values.put(PAID_COL_NAME, paid);
-            values.put(QUANTITY_COL_NAME, quantity);
-            values.put(STATION_ID_COL_NAME, stationId);
-            long id = db.insert(TABLE_NAME,
-                    null,
-                    values);
-            db.close();
-            return id;
-        }
-
-    }
 
 }

@@ -115,22 +115,22 @@ public class Station {
         // Database Name
         private static final String DATABASE_NAME = "CarCost";
 
-        private static final String TABLE_NAME = "Stations";
+        private static final String STATIONS_TABLE_NAME = "Stations";
 
-        private static final String ID_COL_NAME = "id";
-        private static final String DISTRIBUTOR_COL_NAME = "distributor";
-        private static final String NAME_COL_NAME = "name";
-        private static final String COUNTRY_COL_NAME = "country";
-        private static final String CITY_COL_NAME = "city";
-        private static final String STREET_COL_NAME = "street";
-        private static final String BUILDING_COL_NAME = "building";
-        private static final String LATITUDE_COL_NAME = "latitude";
-        private static final String LONGITUDE_COL_NAME = "longitude";
-        private static final int DISTRIBUTOR_SIZE = 20;
-        private static final int NAME_SIZE = 50;
-        private static final int STREET_SIZE = 50;
-        private static final int BUILDING_SIZE = 10;
-        private static final int CITY_SIZE = 30;
+        private static final String STATIONS_ID_COL_NAME = "id";
+        private static final String STATIONS_DISTRIBUTOR_COL_NAME = "distributor";
+        private static final String STATIONS_NAME_COL_NAME = "name";
+        private static final String STATIONS_COUNTRY_COL_NAME = "country";
+        private static final String STATIONS_CITY_COL_NAME = "city";
+        private static final String STATIONS_STREET_COL_NAME = "street";
+        private static final String STATIONS_BUILDING_COL_NAME = "building";
+        private static final String STATIONS_LATITUDE_COL_NAME = "latitude";
+        private static final String STATIONS_LONGITUDE_COL_NAME = "longitude";
+        private static final int STATIONS_DISTRIBUTOR_SIZE = 20;
+        private static final int STATIONS_NAME_SIZE = 50;
+        private static final int STATIONS_STREET_SIZE = 50;
+        private static final int STATIONS_BUILDING_SIZE = 10;
+        private static final int STATIONS_CITY_SIZE = 30;
 
 
         public Storage(Context context) {
@@ -140,39 +140,39 @@ public class Station {
         @Override
         public void onCreate(SQLiteDatabase db) {
             // SQL statement to create station table
-            String CREATE_TABLE_QUERY = "CREATE TABLE " + TABLE_NAME + "( " +
-                    ID_COL_NAME + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    DISTRIBUTOR_COL_NAME + " VARCHAR( " + String.valueOf(DISTRIBUTOR_SIZE) + "), " +
-                    NAME_COL_NAME + " VARCHAR( " + String.valueOf(NAME_SIZE) + "), " +
-                    COUNTRY_COL_NAME + " VARCHAR( " + String.valueOf(NAME_SIZE) + "), " +
-                    STREET_COL_NAME + " VARCHAR( " + String.valueOf(STREET_SIZE) + "), " +
-                    BUILDING_COL_NAME + " VARCHAR( " + String.valueOf(BUILDING_SIZE) + "), " +
-                    CITY_COL_NAME + " VARCHAR( " + String.valueOf(CITY_SIZE) + "), " +
-                    LONGITUDE_COL_NAME + " FLOAT, " +
-                    LATITUDE_COL_NAME + " FLOAT )";
+            String CREATE_STATION_TABLE_QUERY = "CREATE TABLE " + STATIONS_TABLE_NAME + "( " +
+                    STATIONS_ID_COL_NAME + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    STATIONS_DISTRIBUTOR_COL_NAME + " VARCHAR( " + String.valueOf(STATIONS_DISTRIBUTOR_SIZE) + "), " +
+                    STATIONS_NAME_COL_NAME + " VARCHAR( " + String.valueOf(STATIONS_NAME_SIZE) + "), " +
+                    STATIONS_COUNTRY_COL_NAME + " VARCHAR( " + String.valueOf(STATIONS_NAME_SIZE) + "), " +
+                    STATIONS_STREET_COL_NAME + " VARCHAR( " + String.valueOf(STATIONS_STREET_SIZE) + "), " +
+                    STATIONS_BUILDING_COL_NAME + " VARCHAR( " + String.valueOf(STATIONS_BUILDING_SIZE) + "), " +
+                    STATIONS_CITY_COL_NAME + " VARCHAR( " + String.valueOf(STATIONS_CITY_SIZE) + "), " +
+                    STATIONS_LONGITUDE_COL_NAME + " FLOAT, " +
+                    STATIONS_LATITUDE_COL_NAME + " FLOAT )";
 
-            db.execSQL(CREATE_TABLE_QUERY);
+            db.execSQL(CREATE_STATION_TABLE_QUERY);
         }
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older books table if existed
-            db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+            db.execSQL("DROP TABLE IF EXISTS " + STATIONS_TABLE_NAME);
             this.onCreate(db);
         }
 
         public void save(String name, String distributor, String country,  String city, String street, String building, Float lat, Float lon) {
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues values = new ContentValues();
-            values.put(NAME_COL_NAME, name);
-            values.put(DISTRIBUTOR_COL_NAME, distributor);
-            values.put(COUNTRY_COL_NAME, country);
-            values.put(STREET_COL_NAME, street);
-            values.put(BUILDING_COL_NAME, building);
-            values.put(CITY_COL_NAME, city);
-            values.put(LONGITUDE_COL_NAME, lon);
-            values.put(LATITUDE_COL_NAME, lat);
-            db.insert(TABLE_NAME,
+            values.put(STATIONS_NAME_COL_NAME, name);
+            values.put(STATIONS_DISTRIBUTOR_COL_NAME, distributor);
+            values.put(STATIONS_COUNTRY_COL_NAME, country);
+            values.put(STATIONS_STREET_COL_NAME, street);
+            values.put(STATIONS_BUILDING_COL_NAME, building);
+            values.put(STATIONS_CITY_COL_NAME, city);
+            values.put(STATIONS_LONGITUDE_COL_NAME, lon);
+            values.put(STATIONS_LATITUDE_COL_NAME, lat);
+            db.insert(STATIONS_TABLE_NAME,
                     null,
                     values);
             db.close();
