@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Created by Mario Rossi on 27/05/2015 at 21:47.
@@ -14,13 +15,15 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class Refuel {
     private static final Double PRECISION = 0.001;
     private Float distance;
-    private Double price;
-    private Double paid;
-    private Double quantity;
+    private Float price;
+    private Float paid;
+    private Float quantity;
     private Integer stationId;
     private Context mContext;
 
-    public Refuel(Context context, Float distance, Double price, Double paid, Double quantity, Integer stationId){
+    private final String TAG = "CarCost";
+
+    public Refuel(Context context, Float distance, Float price, Float paid, Float quantity, Integer stationId){
         this.mContext = context;
         this.distance = distance;
         this.stationId = stationId;
@@ -35,7 +38,7 @@ public class Refuel {
      * @param paid    total amount paid
      * @param quantity units of fuel bought
      */
-    private void setTriple(Double price, Double paid, Double quantity) {
+    private void setTriple(Float price, Float paid, Float quantity) {
         // raw data
         this.paid = paid;
         this.price = price;
@@ -61,15 +64,16 @@ public class Refuel {
         return Math.abs(this.paid - this.price * this.quantity) <= Math.abs(this.paid * PRECISION);
     }
 
-    public void save() {
+    public long save() {
+        Log.i(TAG, "Refuel class: call saving... " );
         Storage storage = new Storage(this.mContext);
-        storage.save(this.distance, this.price, this.paid, this.quantity, this.stationId);
+        return storage.save(this.distance, this.price, this.paid, this.quantity, this.stationId);
 
     }
 
     class Storage extends SQLiteOpenHelper {
         // Database Version
-        private static final int DATABASE_VERSION = 1;
+        private static final int DATABASE_VERSION = 2;
         // Database Name
         private static final String DATABASE_NAME = "CarCost";
 
@@ -91,12 +95,13 @@ public class Refuel {
             // SQL statement to create station table
             String CREATE_TABLE_QUERY = "CREATE TABLE " + TABLE_NAME + "( " +
                     ID_COL_NAME + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    DISTANCE_COL_NAME + " FLOAT, " +
-                    PRICE_COL_NAME + " FLOAT, " +
-                    PAID_COL_NAME + " FLOAT, " +
-                    QUANTITY_COL_NAME + " FLOAT, " +
-                    STATION_ID_COL_NAME + " int)";
-;            db.execSQL(CREATE_TABLE_QUERY);
+                    DISTANCE_COL_NAME + " REAL, " +
+                    PRICE_COL_NAME + " REAL, " +
+                    PAID_COL_NAME + " REAL, " +
+                    QUANTITY_COL_NAME + " REAL, " +
+                    STATION_ID_COL_NAME + " INTEGER)";
+            Log.i(TAG, "Refuel class: executing query " + CREATE_TABLE_QUERY);
+            db.execSQL(CREATE_TABLE_QUERY);
         }
 
         @Override
@@ -106,7 +111,8 @@ public class Refuel {
             this.onCreate(db);
         }
 
-        public void save(Float distance, Double price, Double paid, Double quantity, Integer stationId) {
+        public long save(Float distance, Float price, Float paid, Float quantity, Integer stationId) {
+            Log.i(TAG, "save arguments: " + distance + ", " + price + ", " + paid + ", " + quantity + ", " + stationId);
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues values = new ContentValues();
             values.put(DISTANCE_COL_NAME, distance);
@@ -114,10 +120,11 @@ public class Refuel {
             values.put(PAID_COL_NAME, paid);
             values.put(QUANTITY_COL_NAME, quantity);
             values.put(STATION_ID_COL_NAME, stationId);
-            db.insert(TABLE_NAME,
+            long id = db.insert(TABLE_NAME,
                     null,
                     values);
             db.close();
+            return id;
         }
 
     }

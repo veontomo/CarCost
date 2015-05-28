@@ -9,11 +9,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 
-public class AddRefuelActivity extends Activity
-{
+public class AddRefuelActivity extends Activity {
     private static final String TAG = "CarCost";
     private static final int TAKE_PHOTO_REQUEST = 1;
     private static final int ADD_STATION_REQUEST = 2;
@@ -22,6 +23,28 @@ public class AddRefuelActivity extends Activity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_refuel);
+
+        Button save = (Button) findViewById(R.id.lay_add_refuel_save_btn);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText distanceText = (EditText) findViewById(R.id.lay_add_refuel_distance_input);
+                EditText priceText = (EditText) findViewById(R.id.lay_add_refuel_price_input);
+                EditText paidText = (EditText) findViewById(R.id.lay_add_refuel_paid_input);
+                EditText quantityText = (EditText) findViewById(R.id.lay_add_refuel_quantity_input);
+                Spinner stationText = (Spinner) findViewById(R.id.lay_add_refuel_station_spinner);
+                Refuel refuel = new Refuel(getApplicationContext(),
+                        Float.parseFloat(distanceText.getEditableText().toString()),
+                        Float.parseFloat(priceText.getEditableText().toString()),
+                        Float.parseFloat(paidText.getEditableText().toString()),
+                        Float.parseFloat(quantityText.getEditableText().toString()),
+                        stationText.getId());
+                long id = refuel.save();
+                Toast.makeText(getApplicationContext(), "Record is saved with id " + String.valueOf(id), Toast.LENGTH_LONG).show();
+                finish();
+
+            }
+        });
 
         Button addPhoto = (Button) findViewById(R.id.lay_add_receipt_photo);
         addPhoto.setOnClickListener(new View.OnClickListener() {
@@ -38,6 +61,7 @@ public class AddRefuelActivity extends Activity
             }
         });
 
+
         Button addStation = (Button) findViewById(R.id.lay_add_station_btn);
         addStation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +72,7 @@ public class AddRefuelActivity extends Activity
         });
 
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Check which request we're responding to
@@ -59,7 +84,7 @@ public class AddRefuelActivity extends Activity
                 Toast.makeText(getApplicationContext(), "photo is NOT received", Toast.LENGTH_LONG).show();
             }
         }
-        if (requestCode == ADD_STATION_REQUEST){
+        if (requestCode == ADD_STATION_REQUEST) {
             if (resultCode == RESULT_OK) {
                 Toast.makeText(getApplicationContext(), "station is added", Toast.LENGTH_LONG).show();
             } else {

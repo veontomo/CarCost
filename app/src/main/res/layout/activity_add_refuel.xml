@@ -160,7 +160,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/lay_add_refuel_save_btn"
-        android:id="@+id/lay_add_car_save_btn"
+        android:id="@+id/lay_add_refuel_save_btn"
         android:layout_alignBaseline="@id/lay_add_refuel_cancel_btn"
         android:layout_toRightOf="@id/lay_add_refuel_cancel_btn"
         android:layout_toEndOf="@id/lay_add_refuel_cancel_btn"
