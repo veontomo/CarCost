@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 /**
  * Class responsible for operations with database.
  * Created by Mario Rossi on 28/05/2015 at 15:26.
@@ -139,6 +141,18 @@ class Storage extends SQLiteOpenHelper {
         db.close();
         return id;
 
+
+    }
+
+    /**
+     * Returns names of stations present in database
+     * @return list of station names
+     */
+    public ArrayList<String> getStationNames() {
+        ArrayList<String> names = new ArrayList<>();
+        names.add("Agip");
+        names.add("Q8");
+        return names;
 
     }
 }

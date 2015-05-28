@@ -8,10 +8,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 
 public class AddRefuelActivity extends Activity {
@@ -74,6 +77,14 @@ public class AddRefuelActivity extends Activity {
             }
         });
 
+        Storage storage = new Storage(getApplicationContext());
+
+        ArrayList<String> stations = storage.getStationNames();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, stations);
+
+        Spinner spinner = (Spinner)findViewById(R.id.lay_add_refuel_station_spinner);
+        spinner.setAdapter(adapter);
+
     }
 
     @Override
@@ -118,4 +129,5 @@ public class AddRefuelActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
