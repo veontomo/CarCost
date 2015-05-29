@@ -27,10 +27,6 @@
             android:label="@string/title_activity_add_car_info" >
         </activity>
         <activity
-            android:name=".StationActivity"
-            android:label="@string/title_activity_station" >
-        </activity>
-        <activity
             android:name=".StatisticsActivity"
             android:label="@string/title_activity_statistics" >
         </activity>
