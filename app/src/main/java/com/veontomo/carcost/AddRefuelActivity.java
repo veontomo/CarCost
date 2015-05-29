@@ -23,6 +23,8 @@ public class AddRefuelActivity extends Activity {
     private static final int TAKE_PHOTO_REQUEST = 1;
     private static final int ADD_STATION_REQUEST = 2;
 
+    private ArrayList<String> stationNames;
+
 
 
     @Override
@@ -82,8 +84,8 @@ public class AddRefuelActivity extends Activity {
 
         Storage storage = new Storage(getApplicationContext());
 
-        ArrayList<String> stations = storage.loadStationNames();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, stations);
+        ArrayList<String> stationNames = storage.loadStationNames();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, stationNames);
 
         Spinner spinner = (Spinner)findViewById(R.id.lay_add_refuel_station_spinner);
         spinner.setAdapter(adapter);

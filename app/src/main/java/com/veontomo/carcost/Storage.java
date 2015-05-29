@@ -2,6 +2,7 @@ package com.veontomo.carcost;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -62,13 +63,16 @@ class Storage extends SQLiteOpenHelper {
     private static final int STATIONS_BUILDING_SIZE = 10;
     private static final int STATIONS_CITY_SIZE = 30;
 
-
-
+    private final Context mContext;
 
     public Storage(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.mContext = context;
     }
 
+    public Context getContext() {
+        return mContext;
+    }
     @Override
     public void onCreate(SQLiteDatabase db) {
         // SQL statement to create station table
@@ -148,12 +152,43 @@ class Storage extends SQLiteOpenHelper {
      * Returns names of stations present in database
      * @return list of station names
      */
-    public ArrayList<String> loadStationNames() {
-        /// !!! stub
-        ArrayList<String> names = new ArrayList<>();
-        names.add("station 1");
-        names.add("station 2");
-        return names;
+    public ArrayList<Station> loadStations() {
+        ArrayList<Station> stations = new ArrayList<Station>();
+        String query = "SELECT  * FROM " + STATIONS_TABLE_NAME;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        Station station = null;
+        if (cursor.moveToFirst()) {
+            do {
+                station = new Station(this.getContext());
+                String name  = cursor.getString(cursor.getColumnIndexOrThrow(STATIONS_NAME_COL_NAME));
+                station.setName(name);
+                String distributor  = cursor.getString(cursor.getColumnIndexOrThrow(STATIONS_DISTRIBUTOR_COL_NAME));
+                station.setDistributor(distributor);
+                // TODO: set up the rest fields (city, building, etc)
+                stations.add(station);
+            } while (cursor.moveToNext());
+        }
+        return stations;
+    }
 
+    /**
+     * Retrieves a list of station names present in database.
+     * @return list of strings
+     * @since 0.1
+     */
+    public ArrayList<String> loadStationNames() {
+        ArrayList<String> names = new ArrayList<String>();
+        String query = "SELECT " + STATIONS_NAME_COL_NAME + " FROM " + STATIONS_TABLE_NAME;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        String name = null;
+        if (cursor.moveToFirst()) {
+            do {
+                name  = cursor.getString(cursor.getColumnIndexOrThrow(STATIONS_NAME_COL_NAME));
+                names.add(name);
+            } while (cursor.moveToNext());
+        }
+        return names;
     }
 }
