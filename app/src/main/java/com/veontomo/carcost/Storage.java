@@ -34,7 +34,6 @@ class Storage extends SQLiteOpenHelper {
      */
     public static abstract class RefuelEntry implements BaseColumns {
         public static final String TABLE_NAME = "Refuels";
-        public static final String ID_COL_NAME = "id";
         public static final String DISTANCE_COL_NAME = "distance";
         public static final String PRICE_COL_NAME = "price";
         public static final String PAID_COL_NAME = "paid";
@@ -47,7 +46,6 @@ class Storage extends SQLiteOpenHelper {
      */
     public static abstract class StationEntry implements BaseColumns {
         public static final String TABLE_NAME = "Stations";
-        public static final String ID_COL_NAME = "id";
         public static final String DISTRIBUTOR_COL_NAME = "distributor";
         public static final String NAME_COL_NAME = "name";
         public static final String COUNTRY_COL_NAME = "country";
@@ -65,7 +63,7 @@ class Storage extends SQLiteOpenHelper {
 
     // SQL statement to create station table
     private static final String CREATE_REFUEL_TABLE_QUERY = "CREATE TABLE " + RefuelEntry.TABLE_NAME + "( " +
-            RefuelEntry.ID_COL_NAME + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            RefuelEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             RefuelEntry.DISTANCE_COL_NAME + " REAL, " +
             RefuelEntry.PRICE_COL_NAME + " REAL, " +
             RefuelEntry.PAID_COL_NAME + " REAL, " +
@@ -76,7 +74,7 @@ class Storage extends SQLiteOpenHelper {
 
     private static final String CREATE_STATION_TABLE_QUERY = "CREATE TABLE " +
             StationEntry.TABLE_NAME + "( " +
-            StationEntry.ID_COL_NAME + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            StationEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             StationEntry.DISTRIBUTOR_COL_NAME + " VARCHAR( " + String.valueOf(StationEntry.DISTRIBUTOR_SIZE) + "), " +
             StationEntry.NAME_COL_NAME + " VARCHAR( " + String.valueOf(StationEntry.NAME_SIZE) + "), " +
             StationEntry.COUNTRY_COL_NAME + " VARCHAR( " + String.valueOf(StationEntry.NAME_SIZE) + "), " +
@@ -190,7 +188,7 @@ class Storage extends SQLiteOpenHelper {
         String query = "SELECT  * FROM " + StationEntry.TABLE_NAME;
         SQLiteDatabase db = this.getWritableDatabase();
         String[] projection = {
-                StationEntry.ID_COL_NAME,
+                StationEntry._ID,
                 StationEntry.DISTRIBUTOR_COL_NAME,
                 StationEntry.NAME_COL_NAME,
                 StationEntry.COUNTRY_COL_NAME,
@@ -202,7 +200,7 @@ class Storage extends SQLiteOpenHelper {
         Cursor cursor = db.query(
                 StationEntry.TABLE_NAME,
                 projection,
-                StationEntry.ID_COL_NAME,
+                StationEntry._ID + "=?",
                 new String[]{String.valueOf(id)},
                 null,
                 null,
