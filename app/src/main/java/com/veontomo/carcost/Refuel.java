@@ -22,14 +22,14 @@ public class Refuel {
     private Float price;
     private Float paid;
     private Float quantity;
-    private Integer stationId;
+    private Long stationId;
     private Context mContext;
 
     private final String TAG = "CarCost";
 
 
 
-    public Refuel(Context context, Float distance, Float price, Float paid, Float quantity, Integer stationId){
+    public Refuel(Context context, Float distance, Float price, Float paid, Float quantity, Long stationId){
         this.mContext = context;
         this.distance = distance;
         this.stationId = stationId;
@@ -68,11 +68,11 @@ public class Refuel {
         this.quantity = quantity;
     }
 
-    public Integer getStationId() {
+    public Long getStationId() {
         return stationId;
     }
 
-    public void setStationId(Integer stationId) {
+    public void setStationId(Long stationId) {
         this.stationId = stationId;
     }
 

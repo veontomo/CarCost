@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +22,8 @@ public class AddRefuelActivity extends Activity {
     private static final String TAG = "CarCost";
     private static final int TAKE_PHOTO_REQUEST = 1;
     private static final int ADD_STATION_REQUEST = 2;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +44,7 @@ public class AddRefuelActivity extends Activity {
                         Float.parseFloat(priceText.getEditableText().toString()),
                         Float.parseFloat(paidText.getEditableText().toString()),
                         Float.parseFloat(quantityText.getEditableText().toString()),
-                        stationText.getId());
+                        stationText.getSelectedItemId());
 
                 Storage storage = new Storage(getApplicationContext());
                 storage.save(refuel);
@@ -84,6 +87,19 @@ public class AddRefuelActivity extends Activity {
 
         Spinner spinner = (Spinner)findViewById(R.id.lay_add_refuel_station_spinner);
         spinner.setAdapter(adapter);
+
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id){
+                Toast.makeText(getApplicationContext(), "item selected: pos = " + String.valueOf(pos) + ", id = " + String.valueOf(id), Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent){
+
+            }
+        });
 
     }
 
