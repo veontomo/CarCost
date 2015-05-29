@@ -2,6 +2,7 @@ package com.veontomo.carcost;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -82,6 +83,11 @@ public class AddStationActivity extends Activity implements LocationListener{
 
                 Storage storage = new Storage(getApplicationContext());
                 long id = storage.save(station);
+                if (id != -1){
+                    Intent result = new Intent();
+                    result.putExtra("name", station.getName());
+                    setResult(RESULT_OK, result);
+                }
                 Toast.makeText(getApplicationContext(), "Station is saved with id " + String.valueOf(id), Toast.LENGTH_LONG).show();
                 finish();
             }

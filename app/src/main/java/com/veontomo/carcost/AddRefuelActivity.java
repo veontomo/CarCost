@@ -25,12 +25,21 @@ public class AddRefuelActivity extends Activity {
 
     private ArrayList<String> stationNames;
 
+    private Spinner spinner;
+    private ArrayAdapter<String> adapter;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_refuel);
+
+        Storage storage = new Storage(getApplicationContext());
+        this.stationNames = storage.loadStationNames();
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, this.stationNames);
+        this.spinner = (Spinner) findViewById(R.id.lay_add_refuel_station_spinner);
+        this.spinner.setAdapter(adapter);
 
         Button save = (Button) findViewById(R.id.lay_add_refuel_save_btn);
         save.setOnClickListener(new View.OnClickListener() {
@@ -82,14 +91,6 @@ public class AddRefuelActivity extends Activity {
             }
         });
 
-        Storage storage = new Storage(getApplicationContext());
-
-        ArrayList<String> stationNames = storage.loadStationNames();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, stationNames);
-
-        Spinner spinner = (Spinner)findViewById(R.id.lay_add_refuel_station_spinner);
-        spinner.setAdapter(adapter);
-
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
             @Override
@@ -119,6 +120,9 @@ public class AddRefuelActivity extends Activity {
         if (requestCode == ADD_STATION_REQUEST) {
             if (resultCode == RESULT_OK) {
                 Toast.makeText(getApplicationContext(), "station is added", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "station name " + data.getStringExtra("name"), Toast.LENGTH_LONG).show();
+                this.stationNames.add(data.getStringExtra("name"));
+                this.adapter.notifyDataSetChanged();
             } else {
                 Toast.makeText(getApplicationContext(), "station is NOT received", Toast.LENGTH_LONG).show();
             }
