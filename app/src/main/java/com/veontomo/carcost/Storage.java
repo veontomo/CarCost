@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.provider.BaseColumns;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -25,45 +26,67 @@ class Storage extends SQLiteOpenHelper {
      * Name of database that contains tables of the application
      */
     private static final String DATABASE_NAME = "CarCost";
-    /**
-     * Name of table that stores information about refuels
-     */
-    private static final String REFUELS_TABLE_NAME = "Refuels";
+
+    private final Context mContext;
 
     /**
      * Names of columns of the refuel table
      */
-    private static final String REFUEL_ID_COL_NAME = "id";
-    private static final String REFUEL_DISTANCE_COL_NAME = "distance";
-    private static final String REFUEL_PRICE_COL_NAME = "price";
-    private static final String REFUEL_PAID_COL_NAME = "paid";
-    private static final String REFUEL_QUANTITY_COL_NAME = "quantity";
-    private static final String REFUEL_STATION_ID_COL_NAME = "station_id";
+    public static abstract class RefuelEntry implements BaseColumns {
+        public static final String TABLE_NAME = "Refuels";
+        public static final String ID_COL_NAME = "id";
+        public static final String DISTANCE_COL_NAME = "distance";
+        public static final String PRICE_COL_NAME = "price";
+        public static final String PAID_COL_NAME = "paid";
+        public static final String QUANTITY_COL_NAME = "quantity";
+        public static final String STATION_ID_COL_NAME = "station_id";
+    }
 
     /**
      * Name of table that stores information about stations
      */
-    private static final String STATIONS_TABLE_NAME = "Stations";
+    public static abstract class StationEntry implements BaseColumns {
+        public static final String TABLE_NAME = "Stations";
+        public static final String ID_COL_NAME = "id";
+        public static final String DISTRIBUTOR_COL_NAME = "distributor";
+        public static final String NAME_COL_NAME = "name";
+        public static final String COUNTRY_COL_NAME = "country";
+        public static final String CITY_COL_NAME = "city";
+        public static final String STREET_COL_NAME = "street";
+        public static final String BUILDING_COL_NAME = "building";
+        public static final String LATITUDE_COL_NAME = "latitude";
+        public static final String LONGITUDE_COL_NAME = "longitude";
+        public static final int DISTRIBUTOR_SIZE = 20;
+        public static final int NAME_SIZE = 50;
+        public static final int STREET_SIZE = 50;
+        public static final int BUILDING_SIZE = 10;
+        public static final int CITY_SIZE = 30;
+    }
 
-    /**
-     * Names of columns of the station table
-     */
-    private static final String STATIONS_ID_COL_NAME = "id";
-    private static final String STATIONS_DISTRIBUTOR_COL_NAME = "distributor";
-    private static final String STATIONS_NAME_COL_NAME = "name";
-    private static final String STATIONS_COUNTRY_COL_NAME = "country";
-    private static final String STATIONS_CITY_COL_NAME = "city";
-    private static final String STATIONS_STREET_COL_NAME = "street";
-    private static final String STATIONS_BUILDING_COL_NAME = "building";
-    private static final String STATIONS_LATITUDE_COL_NAME = "latitude";
-    private static final String STATIONS_LONGITUDE_COL_NAME = "longitude";
-    private static final int STATIONS_DISTRIBUTOR_SIZE = 20;
-    private static final int STATIONS_NAME_SIZE = 50;
-    private static final int STATIONS_STREET_SIZE = 50;
-    private static final int STATIONS_BUILDING_SIZE = 10;
-    private static final int STATIONS_CITY_SIZE = 30;
+    // SQL statement to create station table
+    private static final String CREATE_REFUEL_TABLE_QUERY = "CREATE TABLE " + RefuelEntry.TABLE_NAME + "( " +
+            RefuelEntry.ID_COL_NAME + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            RefuelEntry.DISTANCE_COL_NAME + " REAL, " +
+            RefuelEntry.PRICE_COL_NAME + " REAL, " +
+            RefuelEntry.PAID_COL_NAME + " REAL, " +
+            RefuelEntry.QUANTITY_COL_NAME + " REAL, " +
+            RefuelEntry.STATION_ID_COL_NAME + " INTEGER)";
 
-    private final Context mContext;
+    private static final String DROP_REFUEL_TABLE_QUERY = "DROP TABLE IF EXISTS " + RefuelEntry.TABLE_NAME;
+
+    private static final String CREATE_STATION_TABLE_QUERY = "CREATE TABLE " +
+            StationEntry.TABLE_NAME + "( " +
+            StationEntry.ID_COL_NAME + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            StationEntry.DISTRIBUTOR_COL_NAME + " VARCHAR( " + String.valueOf(StationEntry.DISTRIBUTOR_SIZE) + "), " +
+            StationEntry.NAME_COL_NAME + " VARCHAR( " + String.valueOf(StationEntry.NAME_SIZE) + "), " +
+            StationEntry.COUNTRY_COL_NAME + " VARCHAR( " + String.valueOf(StationEntry.NAME_SIZE) + "), " +
+            StationEntry.STREET_COL_NAME + " VARCHAR( " + String.valueOf(StationEntry.STREET_SIZE) + "), " +
+            StationEntry.BUILDING_COL_NAME + " VARCHAR( " + String.valueOf(StationEntry.BUILDING_SIZE) + "), " +
+            StationEntry.CITY_COL_NAME + " VARCHAR( " + String.valueOf(StationEntry.CITY_SIZE) + "), " +
+            StationEntry.LONGITUDE_COL_NAME + " FLOAT, " +
+            StationEntry.LATITUDE_COL_NAME + " FLOAT )";
+
+    private static final String DROP_STATION_TABLE_QUERY = "DROP TABLE IF EXISTS " + StationEntry.TABLE_NAME;
 
     public Storage(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -76,51 +99,26 @@ class Storage extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // SQL statement to create station table
-        String CREATE_REFUEL_TABLE_QUERY = "CREATE TABLE " + REFUELS_TABLE_NAME + "( " +
-                REFUEL_ID_COL_NAME + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                REFUEL_DISTANCE_COL_NAME + " REAL, " +
-                REFUEL_PRICE_COL_NAME + " REAL, " +
-                REFUEL_PAID_COL_NAME + " REAL, " +
-                REFUEL_QUANTITY_COL_NAME + " REAL, " +
-                REFUEL_STATION_ID_COL_NAME + " INTEGER)";
-        Log.i(TAG, "Storage: creating table Refuel " + CREATE_REFUEL_TABLE_QUERY);
         db.execSQL(CREATE_REFUEL_TABLE_QUERY);
-
-        String CREATE_STATION_TABLE_QUERY = "CREATE TABLE " + STATIONS_TABLE_NAME + "( " +
-                STATIONS_ID_COL_NAME + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                STATIONS_DISTRIBUTOR_COL_NAME + " VARCHAR( " + String.valueOf(STATIONS_DISTRIBUTOR_SIZE) + "), " +
-                STATIONS_NAME_COL_NAME + " VARCHAR( " + String.valueOf(STATIONS_NAME_SIZE) + "), " +
-                STATIONS_COUNTRY_COL_NAME + " VARCHAR( " + String.valueOf(STATIONS_NAME_SIZE) + "), " +
-                STATIONS_STREET_COL_NAME + " VARCHAR( " + String.valueOf(STATIONS_STREET_SIZE) + "), " +
-                STATIONS_BUILDING_COL_NAME + " VARCHAR( " + String.valueOf(STATIONS_BUILDING_SIZE) + "), " +
-                STATIONS_CITY_COL_NAME + " VARCHAR( " + String.valueOf(STATIONS_CITY_SIZE) + "), " +
-                STATIONS_LONGITUDE_COL_NAME + " FLOAT, " +
-                STATIONS_LATITUDE_COL_NAME + " FLOAT )";
-        Log.i(TAG, "Storage: creating table Station " + CREATE_REFUEL_TABLE_QUERY);
-
         db.execSQL(CREATE_STATION_TABLE_QUERY);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Drop older books table if existed
-        db.execSQL("DROP TABLE IF EXISTS " + STATIONS_TABLE_NAME);
-        db.execSQL("DROP TABLE IF EXISTS " + REFUELS_TABLE_NAME);
+        db.execSQL(DROP_STATION_TABLE_QUERY);
+        db.execSQL(DROP_REFUEL_TABLE_QUERY);
         this.onCreate(db);
     }
 
     public Long save(Refuel refuel) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(REFUEL_DISTANCE_COL_NAME, refuel.getDistance());
-        values.put(REFUEL_PRICE_COL_NAME, refuel.getPrice());
-        values.put(REFUEL_PAID_COL_NAME, refuel.getPaid());
-        values.put(REFUEL_QUANTITY_COL_NAME, refuel.getQuantity());
-        values.put(REFUEL_STATION_ID_COL_NAME, refuel.getStationId());
-        long id = db.insert(REFUELS_TABLE_NAME,
-                null,
-                values);
+        values.put(RefuelEntry.DISTANCE_COL_NAME, refuel.getDistance());
+        values.put(RefuelEntry.PRICE_COL_NAME, refuel.getPrice());
+        values.put(RefuelEntry.PAID_COL_NAME, refuel.getPaid());
+        values.put(RefuelEntry.QUANTITY_COL_NAME, refuel.getQuantity());
+        values.put(RefuelEntry.STATION_ID_COL_NAME, refuel.getStationId());
+        long id = db.insert(RefuelEntry.TABLE_NAME, null, values);
         db.close();
         return (id != -1) ? id : null;
     }
@@ -129,17 +127,15 @@ class Storage extends SQLiteOpenHelper {
     public Long save(Station station) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(STATIONS_NAME_COL_NAME, station.getName());
-        values.put(STATIONS_DISTRIBUTOR_COL_NAME, station.getDistributor());
-        values.put(STATIONS_COUNTRY_COL_NAME, station.getCountry());
-        values.put(STATIONS_STREET_COL_NAME, station.getStreet());
-        values.put(STATIONS_BUILDING_COL_NAME, station.getBuilding());
-        values.put(STATIONS_CITY_COL_NAME, station.getCity());
-        values.put(STATIONS_LONGITUDE_COL_NAME, station.getLatitude());
-        values.put(STATIONS_LATITUDE_COL_NAME, station.getLongitude());
-        long id = db.insert(STATIONS_TABLE_NAME,
-                null,
-                values);
+        values.put(StationEntry.NAME_COL_NAME, station.getName());
+        values.put(StationEntry.DISTRIBUTOR_COL_NAME, station.getDistributor());
+        values.put(StationEntry.COUNTRY_COL_NAME, station.getCountry());
+        values.put(StationEntry.STREET_COL_NAME, station.getStreet());
+        values.put(StationEntry.BUILDING_COL_NAME, station.getBuilding());
+        values.put(StationEntry.CITY_COL_NAME, station.getCity());
+        values.put(StationEntry.LONGITUDE_COL_NAME, station.getLatitude());
+        values.put(StationEntry.LATITUDE_COL_NAME, station.getLongitude());
+        long id = db.insert(StationEntry.TABLE_NAME, null, values);
         db.close();
         return (id != -1) ? id : null;
     }
@@ -151,16 +147,16 @@ class Storage extends SQLiteOpenHelper {
      */
     public ArrayList<Station> loadStations() {
         ArrayList<Station> stations = new ArrayList<Station>();
-        String query = "SELECT  * FROM " + STATIONS_TABLE_NAME;
+        String query = "SELECT  * FROM " + StationEntry.TABLE_NAME;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         Station station = null;
         if (cursor.moveToFirst()) {
             do {
                 station = new Station(this.getContext());
-                String name = cursor.getString(cursor.getColumnIndexOrThrow(STATIONS_NAME_COL_NAME));
+                String name = cursor.getString(cursor.getColumnIndexOrThrow(StationEntry.NAME_COL_NAME));
                 station.setName(name);
-                String distributor = cursor.getString(cursor.getColumnIndexOrThrow(STATIONS_DISTRIBUTOR_COL_NAME));
+                String distributor = cursor.getString(cursor.getColumnIndexOrThrow(StationEntry.DISTRIBUTOR_COL_NAME));
                 station.setDistributor(distributor);
                 // TODO: set up the rest fields (city, building, etc)
                 stations.add(station);
@@ -177,13 +173,13 @@ class Storage extends SQLiteOpenHelper {
      */
     public ArrayList<String> loadStationNames() {
         ArrayList<String> names = new ArrayList<String>();
-        String query = "SELECT " + STATIONS_NAME_COL_NAME + " FROM " + STATIONS_TABLE_NAME;
+        String query = "SELECT " + StationEntry.NAME_COL_NAME + " FROM " + StationEntry.TABLE_NAME;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         String name = null;
         if (cursor.moveToFirst()) {
             do {
-                name = cursor.getString(cursor.getColumnIndexOrThrow(STATIONS_NAME_COL_NAME));
+                name = cursor.getString(cursor.getColumnIndexOrThrow(StationEntry.NAME_COL_NAME));
                 names.add(name);
             } while (cursor.moveToNext());
         }
@@ -191,35 +187,35 @@ class Storage extends SQLiteOpenHelper {
     }
 
     public Station getStationById(Long id) {
-        String query = "SELECT  * FROM " + STATIONS_TABLE_NAME;
+        String query = "SELECT  * FROM " + StationEntry.TABLE_NAME;
         SQLiteDatabase db = this.getWritableDatabase();
         String[] projection = {
-                STATIONS_ID_COL_NAME,
-                STATIONS_DISTRIBUTOR_COL_NAME,
-                STATIONS_NAME_COL_NAME,
-                STATIONS_COUNTRY_COL_NAME,
-                STATIONS_CITY_COL_NAME,
-                STATIONS_STREET_COL_NAME,
-                STATIONS_BUILDING_COL_NAME,
-                STATIONS_LATITUDE_COL_NAME,
-                STATIONS_LONGITUDE_COL_NAME};
+                StationEntry.ID_COL_NAME,
+                StationEntry.DISTRIBUTOR_COL_NAME,
+                StationEntry.NAME_COL_NAME,
+                StationEntry.COUNTRY_COL_NAME,
+                StationEntry.CITY_COL_NAME,
+                StationEntry.STREET_COL_NAME,
+                StationEntry.BUILDING_COL_NAME,
+                StationEntry.LATITUDE_COL_NAME,
+                StationEntry.LONGITUDE_COL_NAME};
         Cursor cursor = db.query(
-                STATIONS_TABLE_NAME,  // The table to query
-                projection,                               // The columns to return
-                STATIONS_ID_COL_NAME,                                // The columns for the WHERE clause
-                new String[]{String.valueOf(id)},                            // The values for the WHERE clause
-                null,                                     // don't group the rows
-                null,                                     // don't filter by row groups
-                null                                 // The sort order
+                StationEntry.TABLE_NAME,
+                projection,
+                StationEntry.ID_COL_NAME,
+                new String[]{String.valueOf(id)},
+                null,
+                null,
+                null
         );
         if (cursor.moveToFirst()) {
-                Station station = new Station(this.getContext());
-                String name = cursor.getString(cursor.getColumnIndexOrThrow(STATIONS_NAME_COL_NAME));
-                station.setName(name);
-                String distributor = cursor.getString(cursor.getColumnIndexOrThrow(STATIONS_DISTRIBUTOR_COL_NAME));
-                station.setDistributor(distributor);
-                // TODO: set up the rest fields (city, building, etc)
-                return station;
+            Station station = new Station(this.getContext());
+            String name = cursor.getString(cursor.getColumnIndexOrThrow(StationEntry.NAME_COL_NAME));
+            station.setName(name);
+            String distributor = cursor.getString(cursor.getColumnIndexOrThrow(StationEntry.DISTRIBUTOR_COL_NAME));
+            station.setDistributor(distributor);
+            // TODO: set up the rest fields (city, building, etc)
+            return station;
         }
         return null;
     }
