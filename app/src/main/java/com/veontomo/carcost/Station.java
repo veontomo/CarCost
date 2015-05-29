@@ -105,6 +105,11 @@ public class Station {
         this.street = street;
         this.building = building;
         this.city = city;
+    }
+
+    @Override
+    public String toString(){
+        return this.name;
 
     }
 }

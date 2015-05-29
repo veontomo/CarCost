@@ -73,6 +73,7 @@ class Storage extends SQLiteOpenHelper {
     public Context getContext() {
         return mContext;
     }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         // SQL statement to create station table
@@ -109,7 +110,7 @@ class Storage extends SQLiteOpenHelper {
         this.onCreate(db);
     }
 
-    public long save(Refuel refuel) {
+    public Long save(Refuel refuel) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(REFUEL_DISTANCE_COL_NAME, refuel.getDistance());
@@ -121,14 +122,11 @@ class Storage extends SQLiteOpenHelper {
                 null,
                 values);
         db.close();
-        return id;
+        return (id != -1) ? id : null;
     }
 
 
-
-
-
-    public long save(Station station) {
+    public Long save(Station station) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(STATIONS_NAME_COL_NAME, station.getName());
@@ -143,13 +141,12 @@ class Storage extends SQLiteOpenHelper {
                 null,
                 values);
         db.close();
-        return id;
-
-
+        return (id != -1) ? id : null;
     }
 
     /**
      * Returns names of stations present in database
+     *
      * @return list of station names
      */
     public ArrayList<Station> loadStations() {
@@ -161,9 +158,9 @@ class Storage extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 station = new Station(this.getContext());
-                String name  = cursor.getString(cursor.getColumnIndexOrThrow(STATIONS_NAME_COL_NAME));
+                String name = cursor.getString(cursor.getColumnIndexOrThrow(STATIONS_NAME_COL_NAME));
                 station.setName(name);
-                String distributor  = cursor.getString(cursor.getColumnIndexOrThrow(STATIONS_DISTRIBUTOR_COL_NAME));
+                String distributor = cursor.getString(cursor.getColumnIndexOrThrow(STATIONS_DISTRIBUTOR_COL_NAME));
                 station.setDistributor(distributor);
                 // TODO: set up the rest fields (city, building, etc)
                 stations.add(station);
@@ -174,6 +171,7 @@ class Storage extends SQLiteOpenHelper {
 
     /**
      * Retrieves a list of station names present in database.
+     *
      * @return list of strings
      * @since 0.1
      */
@@ -185,10 +183,44 @@ class Storage extends SQLiteOpenHelper {
         String name = null;
         if (cursor.moveToFirst()) {
             do {
-                name  = cursor.getString(cursor.getColumnIndexOrThrow(STATIONS_NAME_COL_NAME));
+                name = cursor.getString(cursor.getColumnIndexOrThrow(STATIONS_NAME_COL_NAME));
                 names.add(name);
             } while (cursor.moveToNext());
         }
         return names;
+    }
+
+    public Station getStationById(Long id) {
+        String query = "SELECT  * FROM " + STATIONS_TABLE_NAME;
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] projection = {
+                STATIONS_ID_COL_NAME,
+                STATIONS_DISTRIBUTOR_COL_NAME,
+                STATIONS_NAME_COL_NAME,
+                STATIONS_COUNTRY_COL_NAME,
+                STATIONS_CITY_COL_NAME,
+                STATIONS_STREET_COL_NAME,
+                STATIONS_BUILDING_COL_NAME,
+                STATIONS_LATITUDE_COL_NAME,
+                STATIONS_LONGITUDE_COL_NAME};
+        Cursor cursor = db.query(
+                STATIONS_TABLE_NAME,  // The table to query
+                projection,                               // The columns to return
+                STATIONS_ID_COL_NAME,                                // The columns for the WHERE clause
+                new String[]{String.valueOf(id)},                            // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                null                                 // The sort order
+        );
+        if (cursor.moveToFirst()) {
+                Station station = new Station(this.getContext());
+                String name = cursor.getString(cursor.getColumnIndexOrThrow(STATIONS_NAME_COL_NAME));
+                station.setName(name);
+                String distributor = cursor.getString(cursor.getColumnIndexOrThrow(STATIONS_DISTRIBUTOR_COL_NAME));
+                station.setDistributor(distributor);
+                // TODO: set up the rest fields (city, building, etc)
+                return station;
+        }
+        return null;
     }
 }

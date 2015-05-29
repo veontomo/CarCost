@@ -19,7 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationServices;
 
 import java.io.IOException;
 import java.util.List;
@@ -29,6 +28,7 @@ import java.util.Locale;
 public class AddStationActivity extends Activity implements LocationListener{
 
     private static final String TAG = "CarCost";
+    private static final String STATION_ID_KEY_NAME = "stationId" ;
     protected Context context = this;
     protected LocationListener locationListener;
 
@@ -82,10 +82,10 @@ public class AddStationActivity extends Activity implements LocationListener{
                         buildingText.getEditableText().toString());
 
                 Storage storage = new Storage(getApplicationContext());
-                long id = storage.save(station);
-                if (id != -1){
+                Long id = storage.save(station);
+                if (id != null){
                     Intent result = new Intent();
-                    result.putExtra("name", station.getName());
+                    result.putExtra(STATION_ID_KEY_NAME, id);
                     setResult(RESULT_OK, result);
                 }
                 Toast.makeText(getApplicationContext(), "Station is saved with id " + String.valueOf(id), Toast.LENGTH_LONG).show();

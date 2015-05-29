@@ -23,10 +23,16 @@ public class AddRefuelActivity extends Activity {
     private static final int TAKE_PHOTO_REQUEST = 1;
     private static final int ADD_STATION_REQUEST = 2;
 
-    private ArrayList<String> stationNames;
+    /**
+     * Name of key that holds station id when returning result of saving a station
+     * into a database.
+     */
+    private static final String STATION_ID_KEY_NAME = "stationId" ;
 
-    private Spinner spinner;
-    private ArrayAdapter<String> adapter;
+    private ArrayList<Station> stations;
+
+    private Spinner stationSpinner;
+    private ArrayAdapter<Station> stationSpinnerAdapter;
 
 
 
@@ -36,10 +42,10 @@ public class AddRefuelActivity extends Activity {
         setContentView(R.layout.activity_add_refuel);
 
         Storage storage = new Storage(getApplicationContext());
-        this.stationNames = storage.loadStationNames();
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, this.stationNames);
-        this.spinner = (Spinner) findViewById(R.id.lay_add_refuel_station_spinner);
-        this.spinner.setAdapter(adapter);
+        this.stations = storage.loadStations();
+        stationSpinnerAdapter = new ArrayAdapter<Station>(this, android.R.layout.simple_spinner_item, this.stations);
+        this.stationSpinner = (Spinner) findViewById(R.id.lay_add_refuel_station_spinner);
+        this.stationSpinner.setAdapter(stationSpinnerAdapter);
 
         Button save = (Button) findViewById(R.id.lay_add_refuel_save_btn);
         save.setOnClickListener(new View.OnClickListener() {
@@ -92,14 +98,14 @@ public class AddRefuelActivity extends Activity {
         });
 
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+        stationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id){
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 Toast.makeText(getApplicationContext(), "item selected: pos = " + String.valueOf(pos) + ", id = " + String.valueOf(id), Toast.LENGTH_LONG).show();
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent){
+            public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
@@ -119,15 +125,24 @@ public class AddRefuelActivity extends Activity {
         }
         if (requestCode == ADD_STATION_REQUEST) {
             if (resultCode == RESULT_OK) {
-                Toast.makeText(getApplicationContext(), "station is added", Toast.LENGTH_LONG).show();
-                Toast.makeText(getApplicationContext(), "station name " + data.getStringExtra("name"), Toast.LENGTH_LONG).show();
-                this.stationNames.add(data.getStringExtra("name"));
-                this.adapter.notifyDataSetChanged();
+                Long id = data.getLongExtra(STATION_ID_KEY_NAME, -1);
+                if (id != -1){
+                    addStationToSpinner(id);
+                }
             } else {
                 Toast.makeText(getApplicationContext(), "station is NOT received", Toast.LENGTH_LONG).show();
             }
 
         }
+    }
+
+    private void addStationToSpinner(Long id){
+        Storage storage = new Storage(getApplicationContext());
+        Station station = storage.getStationById(id);
+        this.stations.add(station);
+        this.stationSpinnerAdapter.notifyDataSetChanged();
+        this.stationSpinner.setSelection(this.stations.size() - 1);
+
     }
 
     @Override
